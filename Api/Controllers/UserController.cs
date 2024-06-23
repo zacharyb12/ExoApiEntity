@@ -21,7 +21,7 @@ namespace Api.Controllers
         {
             if(!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
             return Ok(_userService.GetAll());
         }
@@ -31,7 +31,7 @@ namespace Api.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
             _userService.Create(user);
             return Ok();
@@ -42,7 +42,7 @@ namespace Api.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
             _userService.Update(user);
             return Ok();
@@ -53,7 +53,7 @@ namespace Api.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
             _userService.Delete(Id);
             return Ok();

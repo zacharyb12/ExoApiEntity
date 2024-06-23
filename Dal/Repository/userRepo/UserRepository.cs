@@ -17,6 +17,18 @@ namespace Dal.Repository.UserRepo
             _context = context;
         }
 
+        public bool login(string email, string password) 
+        {
+            bool verificationStatus = false;
+           User u = _context.User.FirstOrDefault(x => x.Email == email);
+            
+            if(u != null && u.Email == email && u.Password == password) 
+            {
+                    verificationStatus = true;
+            }
+            return verificationStatus;
+        }
+
         public IEnumerable<User> GetAll()
         {
             try
@@ -26,7 +38,7 @@ namespace Dal.Repository.UserRepo
             catch (Exception ex)
             {
                 // Log exception here
-                throw new Exception("An error occurred while retrieving all users.", ex);
+                throw new Exception("An error occurred while retrieving all users Dal GetAll.", ex);
             }
         }
 
@@ -34,14 +46,16 @@ namespace Dal.Repository.UserRepo
         {
             try
             {
-                return _context.User.AsNoTracking().FirstOrDefault(u => u.Id == id);
+                return _context.User.FirstOrDefault(u => u.Id == id);
             }
             catch (Exception ex)
             {
                 // Log exception here
-                throw new Exception($"An error occurred while retrieving the user with ID {id}.", ex);
+                throw new Exception($"An error occurred while retrieving the user  {id}.DAL GetbyId", ex);
             }
         }
+
+
 
         public void Update(User user)
         {
@@ -53,7 +67,7 @@ namespace Dal.Repository.UserRepo
             catch (Exception ex)
             {
                 // Log exception here
-                throw new Exception("An error occurred while updating the user.", ex);
+                throw new Exception("An error occurred while updating the user.DAL Update", ex);
             }
         }
 
@@ -67,7 +81,7 @@ namespace Dal.Repository.UserRepo
             catch (Exception ex)
             {
                 // Log exception here
-                throw new Exception("An error occurred while creating the user.", ex);
+                throw new Exception("An error occurred while creating the user.DAL Create", ex);
             }
         }
 
@@ -85,7 +99,7 @@ namespace Dal.Repository.UserRepo
             catch (Exception ex)
             {
                 // Log exception here
-                throw new Exception($"An error occurred while deleting the user with ID {id}.", ex);
+                throw new Exception($"An error occurred while deleting the user with ID {id}. Delete ", ex);
             }
         }
     }
